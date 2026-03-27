@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#d7e2ff",
+              "secondary-fixed": "#dae4ef",
+              "tertiary": "#71557c",
+              "secondary": "#566069",
+              "on-error": "#fff7f7",
+              "outline": "#6e7b97",
+              "on-primary": "#fff7f8",
+              "on-tertiary-container": "#5f446a",
+              "outline-variant": "#a5b2d0",
+              "on-error-container": "#6e0523",
+              "tertiary-container": "#f5d1ff",
+              "primary": "#6c5a61",
+              "tertiary-fixed": "#f5d1ff",
+              "on-secondary": "#f5f9ff",
+              "on-secondary-fixed-variant": "#535d66",
+              "primary-fixed-dim": "#e6ced6",
+              "on-secondary-container": "#49535c",
+              "on-primary-fixed-variant": "#68575e",
+              "primary-container": "#f4dce4",
+              "surface-container-low": "#f1f3ff",
+              "primary-fixed": "#f4dce4",
+              "surface-container": "#e8eeff",
+              "primary-dim": "#5f4f55",
+              "on-tertiary": "#fff7fc",
+              "secondary-dim": "#4a545d",
+              "background": "#f9f9ff",
+              "tertiary-fixed-dim": "#e6c3f0",
+              "error-container": "#f97386",
+              "surface-tint": "#6c5a61",
+              "on-surface-variant": "#525f7a",
+              "inverse-primary": "#fae2ea",
+              "error": "#a8364b",
+              "on-tertiary-fixed-variant": "#6a4e74",
+              "surface-dim": "#cddaf9",
+              "on-primary-fixed": "#4b3b41",
+              "surface-variant": "#d7e2ff",
+              "on-secondary-fixed": "#374049",
+              "on-background": "#25324b",
+              "inverse-on-surface": "#979dac",
+              "tertiary-dim": "#64496f",
+              "surface-bright": "#f9f9ff",
+              "on-surface": "#25324b",
+              "secondary-fixed-dim": "#cbd6e0",
+              "surface": "#f9f9ff",
+              "inverse-surface": "#080e1a",
+              "on-tertiary-fixed": "#4c3256",
+              "on-primary-container": "#5e4d54",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#dae4ef",
+              "surface-container-high": "#dfe8ff",
+              "error-dim": "#6b0221"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Newsreader"],
+              "label": ["Newsreader"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .branch-line {
+            background: linear-gradient(to bottom, transparent, #a5b2d0 50%, transparent);
+            width: 1px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-[0_20px_50px_rgba(37,50,75,0.06)] flex justify-between items-center px-12 py-6">
+<div class="text-2xl font-bold text-pink-900 dark:text-pink-100 tracking-tighter font-serif italic">Omni-Kernel</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="text-pink-900 dark:text-pink-100 font-bold border-b-2 border-pink-400 hover:scale-105 transition-transform duration-300" href="#">Overview</a>
+<a class="text-slate-500 dark:text-slate-400 hover:scale-105 transition-transform duration-300" href="#">Threat Intelligence</a>
+<a class="text-slate-500 dark:text-slate-400 hover:scale-105 transition-transform duration-300" href="#">Kernel Logs</a>
+<div class="flex items-center gap-4 ml-6">
+<span class="material-symbols-outlined text-pink-700 dark:text-pink-300 cursor-pointer active:opacity-80 transition-all">account_circle</span>
+<span class="material-symbols-outlined text-pink-700 dark:text-pink-300 cursor-pointer active:opacity-80 transition-all">notifications</span>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-48">
+<!-- Hero Section -->
+<header class="px-12 mb-24 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row items-end gap-12">
+<div class="w-full md:w-2/3">
+<h1 class="text-7xl md:text-9xl font-extrabold tracking-tighter leading-none mb-8">
+                        Clarity in the <br/>
+<span class="text-primary italic font-light">Chaos</span>
+</h1>
+<p class="text-2xl text-on-surface-variant max-w-xl leading-relaxed">
+                        An editorial lens on cryptographic anomalies. We don't just detect threats; we compose their resolution through explainable logic.
+                    </p>
+</div>
+<div class="w-full md:w-1/3">
+<div class="aspect-[3/4] rounded-xl overflow-hidden shadow-2xl rotate-3 translate-y-12">
+<img alt="Digital Atelier Art" class="w-full h-full object-cover" data-alt="abstract digital sculpture with translucent glass textures and soft pink light diffusion in a minimalist gallery setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8d8ohP_QHUNUKsJwCVeoh6qVEfNr8BaK8HbQgQ_q3VMEQ0mEVjXnWr97EuUijfjPCYjk-0DNmSjydruwSy3g_COD7LaQIKj6JJR_nRW3YqIdOvb4SSUqVaVk5hjud1KqYZfVMLJH-hppLq5FvRVY-ol24pbrG9Aa1lsgUrpzInK5TAJW0PtOhLuJxF8QoxzDfR1JhblDEl4eySdiQka7pA2CQfXDTJ8IjdqmtQtjq5zvyZHNPN8-zNJNp9PvU3gQ9lJO8AkeYndpC"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Threat Narratives (Vertical Columns) -->
+<section class="px-12 mb-32 max-w-7xl mx-auto space-y-24">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-8">
+<span class="text-sm tracking-widest uppercase text-outline mb-4 block">Current Narrative: 001</span>
+<h2 class="text-5xl md:text-6xl font-bold leading-tight mb-8">The Spectral Incursion of Node-X7</h2>
+<div class="bg-surface-container-low p-12 rounded-lg border-l-4 border-primary">
+<p class="text-xl leading-relaxed text-secondary-dim">
+                            A rhythmic oscillation in packet headers suggested a non-human cadence. Unlike brute-force attempts, this was a whisper—a sequence of micro-adjustments aimed at the Kernel's temporal synchronization.
+                        </p>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col justify-center">
+<div class="p-8 bg-primary-container/30 rounded-full text-center">
+<span class="text-5xl font-bold text-primary italic">98.2%</span>
+<p class="text-sm font-label mt-2 text-on-primary-container uppercase tracking-widest">Confidence Index</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-start-5 md:col-span-8 text-right">
+<span class="text-sm tracking-widest uppercase text-outline mb-4 block">Current Narrative: 002</span>
+<h2 class="text-5xl md:text-6xl font-bold leading-tight mb-8">Entropy Drift in Memory Buffers</h2>
+<div class="bg-surface-container-low p-12 rounded-lg border-r-4 border-tertiary text-left">
+<p class="text-xl leading-relaxed text-secondary-dim">
+                            We observed a gradual degradation of randomness. The system began predicting its own noise. This is the hallmark of a subtle shadow-process attempting to mirror the Kernel's identity.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Rationale (Naked Branching Diagram) -->
+<section class="bg-surface-container-high py-32 px-12 mb-32 overflow-hidden">
+<div class="max-w-6xl mx-auto">
+<div class="mb-20 text-center">
+<h3 class="text-4xl font-bold italic mb-4">The Rationale</h3>
+<p class="text-outline">The path of algorithmic decision making.</p>
+</div>
+<div class="relative flex flex-col items-center">
+<!-- Root Node -->
+<div class="relative z-10 bg-white p-8 rounded-full border border-outline-variant/20 shadow-sm mb-16 px-12">
+<span class="font-bold text-lg">Initial Anomaly Detected</span>
+</div>
+<div class="w-full flex justify-between max-w-4xl relative">
+<!-- Connecting Lines -->
+<div class="absolute top-[-4rem] left-1/2 w-px h-16 branch-line"></div>
+<div class="absolute top-0 left-1/4 right-1/4 h-px bg-outline-variant/30"></div>
+<!-- Left Path -->
+<div class="w-1/3 flex flex-col items-center text-center">
+<div class="h-12 w-px bg-outline-variant/30"></div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary mb-2">fingerprint</span>
+<h4 class="font-bold mb-2">Signature Match</h4>
+<p class="text-sm text-secondary italic">Cross-referenced with 4M known hashes.</p>
+</div>
+</div>
+<!-- Middle Path -->
+<div class="w-1/3 flex flex-col items-center text-center">
+<div class="h-12 w-px bg-outline-variant/30"></div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm scale-110 border border-primary/20">
+<span class="material-symbols-outlined text-tertiary mb-2">psychology</span>
+<h4 class="font-bold mb-2">Heuristic Shift</h4>
+<p class="text-sm text-secondary italic">Deviation from historical baseline.</p>
+</div>
+</div>
+<!-- Right Path -->
+<div class="w-1/3 flex flex-col items-center text-center">
+<div class="h-12 w-px bg-outline-variant/30"></div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary mb-2">hub</span>
+<h4 class="font-bold mb-2">Network Origin</h4>
+<p class="text-sm text-secondary italic">Mapped to ephemeral ingress points.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Remediation Palette -->
+<section class="px-12 max-w-5xl mx-auto">
+<div class="text-center mb-16">
+<h3 class="text-4xl font-bold mb-4 tracking-tight">Remediation Palette</h3>
+<p class="text-on-surface-variant italic">Select a brush to re-paint the security landscape.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<!-- Floating Softly Glowing Buttons -->
+<button class="group relative px-10 py-5 bg-white text-primary rounded-full font-bold shadow-[0_10px_30px_rgba(108,90,97,0.1)] hover:shadow-[0_15px_40px_rgba(108,90,97,0.2)] hover:scale-105 transition-all duration-500 border border-primary/5 overflow-hidden">
+<span class="relative z-10 flex items-center gap-3">
+<span class="material-symbols-outlined">auto_fix_high</span>
+                        Neutralize &amp; Recalibrate
+                    </span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-20 transition-opacity"></div>
+</button>
+<button class="group relative px-10 py-5 bg-primary text-on-primary rounded-full font-bold shadow-[0_10px_30px_rgba(108,90,97,0.3)] hover:shadow-[0_15px_40px_rgba(108,90,97,0.4)] hover:scale-105 transition-all duration-500 overflow-hidden">
+<span class="relative z-10 flex items-center gap-3">
+<span class="material-symbols-outlined" data-weight="fill">shield_with_heart</span>
+                        Immune System Boost
+                    </span>
+<div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<button class="group relative px-10 py-5 bg-surface-container-highest text-on-surface rounded-full font-bold shadow-[0_10px_30px_rgba(215,226,255,0.4)] hover:shadow-[0_15px_40px_rgba(215,226,255,0.6)] hover:scale-105 transition-all duration-500 border border-outline-variant/10">
+<span class="relative z-10 flex items-center gap-3">
+<span class="material-symbols-outlined">waves</span>
+                        Dampen Trajectory
+                    </span>
+</button>
+</div>
+</section>
+</main>
+<!-- Side Navigation Anchor (Hidden on Mobile) -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-screen w-20 flex-col items-center py-12 gap-12 bg-slate-50/40 backdrop-blur-xl z-40">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Lead Architect" class="w-full h-full object-cover" data-alt="portrait of a focused professional architect in a minimalist white studio space with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7CDaHXBTBFQukB1lEX0ZLIb-DTC0dNbDvIvY8tQyJPfw5-ihgCvscrkyh0HKhzubBiLPh_-LQ_1Hz1awxXygUUkcTMyJsX6YFyt4V2M8dvrC331p3P6C4g9wOvJQnPF0amXGTlkGFSpDtFGMsNlOU66MgMGfFiT4dynkyZyxLdKarDQxogsm-WuOd2bMoVtPNlbOdFKYMmJaZUTNC1fSjxGL723EZyZGRRrOfYG2cZyjxd7p3NjHZ0bJZ_gkGrDpN3pEF7X5SJy1h"/>
+</div>
+<div class="flex flex-col gap-8 flex-1 justify-center">
+<span class="material-symbols-outlined text-pink-900 font-semibold italic scale-125 cursor-pointer" title="Overview">dashboard</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-pink-500 transition-colors cursor-pointer" title="Threat Intelligence">security</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-pink-500 transition-colors cursor-pointer" title="Kernel Logs">terminal</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-pink-500 transition-colors cursor-pointer" title="Network Topology">hub</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-pink-500 transition-colors cursor-pointer" title="Security Settings">settings</span>
+</div>
+<div class="rotate-90 origin-center whitespace-nowrap text-sm tracking-widest uppercase font-bold text-pink-900/40 translate-y-8">
+            Omni-Kernel Admin
+        </div>
+</aside>
+<!-- Footer Decoration -->
+<footer class="w-full py-12 px-12 border-t border-outline-variant/5">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-outline-variant italic">
+<span>The Logic of Response (XAI) // v4.0.2</span>
+<span>© 2024 Omni-Kernel Labs. All rights reserved.</span>
+</div>
+</footer>
+</body></html>

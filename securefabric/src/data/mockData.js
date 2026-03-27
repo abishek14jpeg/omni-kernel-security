@@ -1,0 +1,211 @@
+// Mock data for Omni-Kernel platform
+
+export const systemMetrics = {
+  riskScore: 72,
+  activeAlerts: 14,
+  containersMonitored: 847,
+  eventsPerSecond: 42381,
+  modelsAccuracy: 94.7,
+  uptimePct: 99.98,
+  clustersOnline: 6,
+  anomaliesDetected: 3,
+};
+
+export const telemetryStream = [
+  { time: '00:00', syscalls: 38200, networkEvents: 12400, anomalies: 2 },
+  { time: '00:05', syscalls: 41000, networkEvents: 13100, anomalies: 1 },
+  { time: '00:10', syscalls: 39800, networkEvents: 11900, anomalies: 4 },
+  { time: '00:15', syscalls: 44200, networkEvents: 14800, anomalies: 8 },
+  { time: '00:20', syscalls: 47100, networkEvents: 16200, anomalies: 15 },
+  { time: '00:25', syscalls: 43500, networkEvents: 14100, anomalies: 6 },
+  { time: '00:30', syscalls: 42381, networkEvents: 13900, anomalies: 3 },
+  { time: '00:35', syscalls: 45200, networkEvents: 15300, anomalies: 5 },
+  { time: '00:40', syscalls: 48900, networkEvents: 17100, anomalies: 12 },
+  { time: '00:45', syscalls: 46700, networkEvents: 16400, anomalies: 7 },
+  { time: '00:50', syscalls: 43100, networkEvents: 14200, anomalies: 3 },
+  { time: '00:55', syscalls: 42381, networkEvents: 13700, anomalies: 2 },
+];
+
+export const threatAlerts = [
+  {
+    id: 'T-00842',
+    type: 'Path Traversal',
+    severity: 'critical',
+    container: 'api-gateway-7f9d',
+    cluster: 'prod-us-east-1',
+    timestamp: '2025-07-14T00:48:22Z',
+    confidence: 96.2,
+    status: 'active',
+    riskScore: 94,
+    shap: { 'file_access_pattern': 0.48, 'syscall_sequence': 0.31, 'user_agent': 0.13, 'geolocation': 0.08 },
+    description: 'Detected path traversal attempt via ../../../etc/passwd pattern in HTTP request.',
+    playbook: 'QUARANTINE_POD',
+  },
+  {
+    id: 'T-00841',
+    type: 'DDoS',
+    severity: 'high',
+    container: 'ingress-nginx-2c8b',
+    cluster: 'prod-eu-west-2',
+    timestamp: '2025-07-14T00:47:11Z',
+    confidence: 88.5,
+    status: 'mitigating',
+    riskScore: 81,
+    shap: { 'request_rate': 0.55, 'source_ips': 0.24, 'packet_size': 0.14, 'protocol': 0.07 },
+    description: 'Volumetric attack detected -- 580k req/s from 4,200 unique IPs across 28 ASNs.',
+    playbook: 'RATE_LIMIT_BLOCK',
+  },
+  {
+    id: 'T-00840',
+    type: 'Prompt Injection',
+    severity: 'high',
+    container: 'llm-inference-4a2f',
+    cluster: 'prod-us-west-2',
+    timestamp: '2025-07-14T00:44:58Z',
+    confidence: 91.7,
+    status: 'active',
+    riskScore: 78,
+    shap: { 'model_output_pattern': 0.62, 'input_token_entropy': 0.21, 'system_prompt_delta': 0.12, 'response_length': 0.05 },
+    description: 'Semantic monitoring flagged jailbreak attempt targeting inference endpoint.',
+    playbook: 'SEMANTIC_FILTER',
+  },
+  {
+    id: 'T-00839',
+    type: 'Privilege Escalation',
+    severity: 'high',
+    container: 'auth-service-9e1c',
+    cluster: 'staging-us-east-1',
+    timestamp: '2025-07-14T00:41:33Z',
+    confidence: 84.3,
+    status: 'resolved',
+    riskScore: 71,
+    shap: { 'syscall_setuid': 0.44, 'process_tree': 0.28, 'capability_usage': 0.18, 'network_outbound': 0.10 },
+    description: 'Process attempted setuid escalation via compromised SUID binary.',
+    playbook: 'KILL_PROCESS',
+  },
+  {
+    id: 'T-00838',
+    type: 'Data Exfiltration',
+    severity: 'medium',
+    container: 'db-proxy-3b7e',
+    cluster: 'prod-ap-southeast-1',
+    timestamp: '2025-07-14T00:39:17Z',
+    confidence: 79.1,
+    status: 'monitoring',
+    riskScore: 58,
+    shap: { 'outbound_data_volume': 0.51, 'destination_ip': 0.27, 'query_pattern': 0.16, 'time_of_day': 0.06 },
+    description: 'Unusual outbound data volume to unknown IP -- potential exfil via DNS tunneling.',
+    playbook: 'BLOCK_EGRESS',
+  },
+  {
+    id: 'T-00837',
+    type: 'Lateral Movement',
+    severity: 'medium',
+    container: 'worker-node-8d4a',
+    cluster: 'prod-us-east-1',
+    timestamp: '2025-07-14T00:35:44Z',
+    confidence: 76.8,
+    status: 'monitoring',
+    riskScore: 54,
+    shap: { 'internal_scan': 0.46, 'new_connections': 0.31, 'credential_reuse': 0.15, 'port_sequence': 0.08 },
+    description: 'Pod scanning internal subnet -- possible lateral movement post-compromise.',
+    playbook: 'NETWORK_ISOLATE',
+  },
+  {
+    id: 'T-00836',
+    type: 'Anomalous Login',
+    severity: 'low',
+    container: 'identity-provider-5f2d',
+    cluster: 'prod-us-east-1',
+    timestamp: '2025-07-14T00:28:09Z',
+    confidence: 68.4,
+    status: 'resolved',
+    riskScore: 32,
+    shap: { 'geolocation': 0.58, 'login_time': 0.22, 'device_fingerprint': 0.14, 'failed_attempts': 0.06 },
+    description: 'Login from unusual geographic location detected -- flagged by zero trust policy.',
+    playbook: 'MFA_CHALLENGE',
+  },
+];
+
+export const clusterHealth = [
+  { name: 'prod-us-east-1', pods: 284, alerts: 4, status: 'warning', cpu: 71, mem: 68, region: 'US East' },
+  { name: 'prod-eu-west-2', pods: 196, alerts: 1, status: 'warning', cpu: 62, mem: 74, region: 'EU West' },
+  { name: 'prod-us-west-2', pods: 158, alerts: 2, status: 'critical', cpu: 88, mem: 81, region: 'US West' },
+  { name: 'prod-ap-southeast-1', pods: 122, alerts: 1, status: 'healthy', cpu: 44, mem: 52, region: 'AP SE' },
+  { name: 'staging-us-east-1', pods: 64, alerts: 1, status: 'healthy', cpu: 33, mem: 41, region: 'Staging' },
+  { name: 'dev-us-west-1', pods: 23, alerts: 0, status: 'healthy', cpu: 18, mem: 29, region: 'Dev' },
+];
+
+export const mlModelStats = [
+  { name: 'Federated VAE', type: 'Global Baseline', accuracy: 97.2, latency: 12, status: 'online', trainingEpoch: 847 },
+  { name: 'Isolation Forest', type: 'Local Anomaly', accuracy: 94.1, latency: 3, status: 'online', trainingEpoch: 1204 },
+  { name: 'Random Forest', type: 'Classification', accuracy: 91.8, latency: 8, status: 'online', trainingEpoch: 562 },
+  { name: 'Deep Classifier', type: 'Attack Categorization', accuracy: 93.5, latency: 24, status: 'online', trainingEpoch: 318 },
+  { name: 'Semantic Monitor', type: 'AI Safety', accuracy: 89.4, latency: 31, status: 'online', trainingEpoch: 124 },
+];
+
+export const honeypotData = {
+  totalCaptures: 28491,
+  last24h: 1842,
+  attackTypes: [
+    { type: 'SSH Brute Force', count: 8234, pct: 28.9 },
+    { type: 'Web Exploit', count: 6712, pct: 23.6 },
+    { type: 'Port Scan', count: 5891, pct: 20.7 },
+    { type: 'Credential Stuffing', count: 3921, pct: 13.8 },
+    { type: 'Botnet C2', count: 2188, pct: 7.7 },
+    { type: 'Other', count: 1545, pct: 5.4 },
+  ],
+  geoSources: [
+    { country: 'CN', count: 7821 },
+    { country: 'RU', count: 5234 },
+    { country: 'US', count: 3891 },
+    { country: 'BR', count: 2104 },
+    { country: 'IN', count: 1892 },
+    { country: 'KR', count: 1654 },
+  ],
+  captureTimeline: [
+    { hour: '18:00', captures: 64 }, { hour: '19:00', captures: 82 },
+    { hour: '20:00', captures: 91 }, { hour: '21:00', captures: 134 },
+    { hour: '22:00', captures: 178 }, { hour: '23:00', captures: 201 },
+    { hour: '00:00', captures: 244 }, { hour: '01:00', captures: 198 },
+    { hour: '02:00', captures: 156 }, { hour: '03:00', captures: 124 },
+    { hour: '04:00', captures: 98 }, { hour: '05:00', captures: 72 },
+  ],
+};
+
+export const networkFlows = [
+  { src: 'api-gateway', dst: 'auth-service', protocol: 'gRPC', bytes: 1240000, status: 'normal' },
+  { src: 'api-gateway', dst: 'llm-inference', protocol: 'HTTPS', bytes: 8920000, status: 'anomalous' },
+  { src: 'ingress-nginx', dst: 'api-gateway', protocol: 'HTTP/2', bytes: 24800000, status: 'suspicious' },
+  { src: 'db-proxy', dst: 'external-52.14.x', protocol: 'TCP', bytes: 4120000, status: 'blocked' },
+  { src: 'worker-node', dst: '10.0.0.0/24', protocol: 'ICMP', bytes: 340000, status: 'suspicious' },
+  { src: 'auth-service', dst: 'identity-provider', protocol: 'LDAP', bytes: 890000, status: 'normal' },
+  { src: 'monitoring', dst: 'all-pods', protocol: 'UDP', bytes: 12400000, status: 'normal' },
+];
+
+export const soarPlaybooks = [
+  { id: 'QUARANTINE_POD', name: 'Quarantine Pod', desc: 'Isolate container from network fabric', execTime: '2.3s', lastRun: '2 min ago' },
+  { id: 'RATE_LIMIT_BLOCK', name: 'Rate Limit & Block', desc: 'Apply rate limits and IP block rules', execTime: '0.8s', lastRun: '4 min ago' },
+  { id: 'SEMANTIC_FILTER', name: 'Semantic Filter', desc: 'Apply semantic prompt filter at inference layer', execTime: '1.1s', lastRun: '8 min ago' },
+  { id: 'KILL_PROCESS', name: 'Kill Process', desc: 'Terminate suspicious process tree', execTime: '0.4s', lastRun: '15 min ago' },
+  { id: 'BLOCK_EGRESS', name: 'Block Egress', desc: 'Block outbound connection via eBPF filter', execTime: '1.4s', lastRun: '22 min ago' },
+  { id: 'NETWORK_ISOLATE', name: 'Network Isolate', desc: 'Enforce zero-trust microsegmentation', execTime: '3.1s', lastRun: '37 min ago' },
+  { id: 'MFA_CHALLENGE', name: 'MFA Challenge', desc: 'Force re-authentication with MFA', execTime: '0.2s', lastRun: '44 min ago' },
+];
+
+export const ebpfEvents = [
+  { id: 1, ts: '00:48:22.431', type: 'sys_open', pid: 18234, comm: 'python3', path: '/etc/passwd', verdict: 'BLOCKED' },
+  { id: 2, ts: '00:48:22.089', type: 'tcp_connect', pid: 18229, comm: 'node', path: '52.14.231.8:443', verdict: 'FLAGGED' },
+  { id: 3, ts: '00:48:21.774', type: 'sys_execve', pid: 18201, comm: 'sh', path: '/bin/bash -i', verdict: 'BLOCKED' },
+  { id: 4, ts: '00:48:21.312', type: 'sys_setuid', pid: 18188, comm: 'auth-srv', path: 'uid=0', verdict: 'BLOCKED' },
+  { id: 5, ts: '00:48:20.901', type: 'socket_send', pid: 18142, comm: 'db-proxy', path: '10.0.0.1:5432', verdict: 'ALLOW' },
+  { id: 6, ts: '00:48:20.654', type: 'sys_read', pid: 18099, comm: 'envoy', path: '/proc/self/mem', verdict: 'FLAGGED' },
+  { id: 7, ts: '00:48:20.312', type: 'tcp_accept', pid: 17988, comm: 'nginx', path: '0.0.0.0:443', verdict: 'ALLOW' },
+  { id: 8, ts: '00:48:19.877', type: 'sys_mmap', pid: 17941, comm: 'loader', path: 'anon 8MB RWX', verdict: 'FLAGGED' },
+];
+
+export const riskTrend = [
+  { day: 'Mon', score: 42 }, { day: 'Tue', score: 38 }, { day: 'Wed', score: 55 },
+  { day: 'Thu', score: 49 }, { day: 'Fri', score: 61 }, { day: 'Sat', score: 58 },
+  { day: 'Sun', score: 72 },
+];
