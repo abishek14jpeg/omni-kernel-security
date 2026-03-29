@@ -1,0 +1,8 @@
+transaction_id,system_timestamp,dataset_time_sec,amount,input_v_sum,anomaly_score_mse,threshold,rules_triggered,final_decision,reasoning
+CC-41D2E706,2026-03-29T09:16:42.737887Z,3600,150.0,1.4000000000000001,0.176942,9.913725,,APPROVE,Transaction strictly cleared all rules and AI anomaly thresholds.
+CC-2E3C3A0C,2026-03-29T09:16:42.742601Z,5000,850.0,91.0,1187.935791,9.913725,,FLAG,AI detected unusual latent patterns (High MSE score). Flagging for human review.
+CC-E1CE2C6F,2026-03-29T09:16:42.746474Z,4000,75000.0,1.4000000000000001,4121.453125,9.913725,R002,REJECT,Transaction violates deterministic compliance guardrails (Hard Rule Failure).
+CC-CE0D223D,2026-03-29T09:16:42.750034Z,4200,-50.0,1.4000000000000001,0.270332,9.913725,R001,REJECT,Transaction violates deterministic compliance guardrails (Hard Rule Failure).
+CC-828DD4F2,2026-03-29T09:16:42.752775Z,8000,200.0,1.4000000000000001,1.352399,9.913725,R003,REJECT,Transaction violates deterministic compliance guardrails (Hard Rule Failure).
+CC-C919DBA3,2026-03-29T09:16:42.756624Z,9000,150000.0,91.0,17689.595703,9.913725,R002|R003,REJECT,Transaction violates deterministic compliance guardrails (Hard Rule Failure).
+CC-2D27A1A9,2026-03-29T09:16:42.760644Z,3600,500.0,nan,nan,9.913725,R004,REJECT,Transaction violates deterministic compliance guardrails (Hard Rule Failure).

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFinanceRealtime } from '../hooks/useFinanceRealtime';
 import TopNavigation from '../components/dashboard/TopNavigation';
@@ -370,16 +370,120 @@ function AuditViewer({ record }) {
   );
 }
 
+function ManualTestForm({ onTest }) {
+  const [amount, setAmount] = useState('15000');
+  const [time, setTime] = useState('7500'); // roughly 2am
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!amount || !time) return;
+    setStatus('loading');
+    await onTest(amount, time);
+    setStatus('success');
+    setTimeout(() => {
+      setStatus('idle');
+      setAmount('');
+      setTime('');
+    }, 1500);
+  };
+
+  return (
+    <div className="glass-panel p-6 rounded-xl border border-outline-variant/10 shadow-sm h-full">
+      <h3 className="text-sm uppercase tracking-widest text-primary font-bold mb-4">Manual Transaction Injection</h3>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-on-surface-variant mb-1 font-bold">Time (Seconds)</label>
+          <input 
+            type="number" 
+            value={time} 
+            onChange={(e) => setTime(e.target.value)}
+            disabled={status !== 'idle'}
+            className="w-full bg-surface border border-outline-variant/20 rounded-lg px-4 py-2 text-sm text-on-surface focus:outline-none focus:border-primary transition-colors font-mono disabled:opacity-50"
+            placeholder="e.g. 7500 (2:05 AM)"
+          />
+        </div>
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-on-surface-variant mb-1 font-bold">Amount (USD)</label>
+          <input 
+            type="number" 
+            value={amount} 
+            onChange={(e) => setAmount(e.target.value)}
+            disabled={status !== 'idle'}
+            className="w-full bg-surface border border-outline-variant/20 rounded-lg px-4 py-2 text-sm text-on-surface focus:outline-none focus:border-primary transition-colors font-mono disabled:opacity-50"
+            placeholder="e.g. 15000"
+          />
+        </div>
+        <button 
+          type="submit" 
+          disabled={status !== 'idle'}
+          className={`mt-2 w-full py-2 border transition-all rounded-lg text-xs font-bold uppercase tracking-widest flex justify-center items-center gap-2 ${
+            status === 'idle' ? 'bg-primary/10 text-primary border-primary/20 hover:bg-primary hover:text-white' :
+            status === 'loading' ? 'bg-surface-container text-on-surface border-outline-variant/20 cursor-wait' :
+            'bg-emerald-500 text-white border-emerald-600'
+          }`}
+        >
+          {status === 'idle' && 'Execute Test'}
+          {status === 'loading' && <><span className="material-symbols-outlined text-[14px] animate-spin">refresh</span> Processing...</>}
+          {status === 'success' && <><span className="material-symbols-outlined text-[14px]">check</span> Sent to Ledger</>}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function VisualizationModal({ isOpen, onClose, fetchVis }) {
+  const [imgSrc, setImgSrc] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setLoading(true);
+      fetchVis().then(src => {
+        setImgSrc(src);
+        setLoading(false);
+      });
+    }
+  }, [isOpen, fetchVis]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="glass-panel max-w-4xl w-full p-8 rounded-2xl relative animate-scale-in">
+        <button onClick={onClose} className="absolute top-4 right-4 material-symbols-outlined text-on-surface-variant hover:text-on-surface">
+          close
+        </button>
+        <h2 className="text-xl font-bold font-serif italic mb-6">AI Anomaly Distribution (Matplotlib)</h2>
+        <div className="w-full min-h-[400px] flex items-center justify-center bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20">
+          {loading ? (
+             <div className="flex flex-col items-center gap-4 text-on-surface-variant">
+               <span className="material-symbols-outlined animate-spin">refresh</span>
+               <span className="text-sm font-mono tracking-widest uppercase">Rendering Python Plot...</span>
+             </div>
+          ) : imgSrc ? (
+             <img src={imgSrc} alt="Matplotlib PCA Visualization" className="w-full h-auto object-contain" />
+          ) : (
+             <span className="text-error font-mono text-sm">Failed to generate visualization.</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ──────────────────────────── MAIN PAGE ──────────────────────────── */
 export default function FinancePage({ onNavigate }) {
   const {
     connected, transactions, anomalyScores, dashboardStats,
     latestAuditRecord, pipelineStage, runDemo,
-    rules, updateRule,
+    rules, updateRule, testSingleTransaction, fetchVisualization,
+    exportAuditLog,
   } = useFinanceRealtime();
 
   const [demoRunning, setDemoRunning] = useState(false);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
+  const [isVisOpen, setIsVisOpen] = useState(false);
 
   const handleRunDemo = async () => {
     setDemoRunning(true);
@@ -427,13 +531,36 @@ export default function FinancePage({ onNavigate }) {
             </div>
             
             <div className="flex flex-col gap-4 items-end">
-                <button
-                onClick={() => setIsConfigOpen(true)}
-                className="px-6 py-2 rounded-full border border-primary/20 bg-surface text-primary font-bold text-xs tracking-widest uppercase hover:bg-primary-container transition-colors flex items-center gap-2 shadow-sm"
-                >
-                <span className="material-symbols-outlined text-[18px]">settings_suggest</span>
-                Configure Guardrails
-                </button>
+                <div className="flex gap-3 flex-wrap justify-end">
+                    <button
+                    onClick={() => setIsVisOpen(true)}
+                    className="px-5 py-2 rounded-full border border-primary/20 bg-surface flex items-center gap-2 shadow-sm text-primary font-bold text-xs tracking-widest uppercase hover:bg-primary-container transition-colors"
+                    >
+                    <span className="material-symbols-outlined text-[18px]">analytics</span>
+                    Matplotlib Vis
+                    </button>
+                    <button
+                    onClick={() => setIsConfigOpen(true)}
+                    className="px-5 py-2 rounded-full border border-primary/20 bg-surface flex items-center gap-2 shadow-sm text-primary font-bold text-xs tracking-widest uppercase hover:bg-primary-container transition-colors"
+                    >
+                    <span className="material-symbols-outlined text-[18px]">settings_suggest</span>
+                    Guardrails
+                    </button>
+                    <button
+                    onClick={() => exportAuditLog('json')}
+                    className="px-5 py-2 rounded-full border border-emerald-300/40 bg-surface flex items-center gap-2 shadow-sm text-emerald-700 font-bold text-xs tracking-widest uppercase hover:bg-emerald-50 transition-colors"
+                    >
+                    <span className="material-symbols-outlined text-[18px]">download</span>
+                    Export JSON
+                    </button>
+                    <button
+                    onClick={() => exportAuditLog('csv')}
+                    className="px-5 py-2 rounded-full border border-emerald-300/40 bg-surface flex items-center gap-2 shadow-sm text-emerald-700 font-bold text-xs tracking-widest uppercase hover:bg-emerald-50 transition-colors"
+                    >
+                    <span className="material-symbols-outlined text-[18px]">table_chart</span>
+                    Export CSV
+                    </button>
+                </div>
                 <button
                 onClick={handleRunDemo}
                 disabled={demoRunning}
@@ -506,6 +633,14 @@ export default function FinancePage({ onNavigate }) {
                 </div>
             </div>
 
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4">
+                <div className="lg:col-span-6 h-[400px]">
+                    <FadeInScroll delay={0.9}>
+                        <ManualTestForm onTest={testSingleTransaction} />
+                    </FadeInScroll>
+                </div>
+            </div>
+
         </div>
 
         {/* Footer */}
@@ -522,6 +657,12 @@ export default function FinancePage({ onNavigate }) {
         onClose={() => setIsConfigOpen(false)} 
         rules={rules} 
         onUpdateRule={updateRule} 
+      />
+      
+      <VisualizationModal
+        isOpen={isVisOpen}
+        onClose={() => setIsVisOpen(false)}
+        fetchVis={fetchVisualization}
       />
     </div>
   );

@@ -1,0 +1,65 @@
+============================================================
+  INITIALIZING CREDIT CARD FRAUD COMPLIANCE TEST HARNESS
+============================================================
+
+[✓] Phase 1/4: Bootstrapping Neural Core...
+[DataLoader] SUCCESS! Loading your actual dataset from C:\Users\Abishek14\WebstormProjects\ET-GENAI-ROUND2-PROJECT\creditcard.csv...
+[DataLoader] Processing subset of 5000 rows.
+[DataLoader] Train size (Normal only): 3997
+[DataLoader] Test size (Mixed): 1003 (Frauds: 3)
+[Preprocessor] Fitting StandardScaler on normal training data (30 features)...
+[Model] Training LSTM Autoencoder for 1 epochs...
+  Epoch 01/1 | Loss: 0.996837
+[Model] Calculating reconstruction threshold via mu + 3*sigma...
+[Model] Threshold calculated: 9.913725
+
+[✓] Phase 2/4: Loading AI Guardrail Test Suite...
+
+[✓] Phase 3/4: Executing Deterministic Testing Payload...
+[✅ PASS] Normal: Standard Low-Risk Transaction
+[✅ PASS] Anomaly: Probabilistic Fraud Detection (High MSE)
+[✅ PASS] Rule Violation: Corporate Limit Exceeded (> $10k)
+[✅ PASS] Rule Violation: Negative Transaction Amount
+[✅ PASS] Rule Violation: Suspicious Timing (Off-Hours Matrix)
+[✅ PASS] Combined: AI Anomaly + Rule Violations Override
+[✅ PASS] Edge Case: Vector Integrity (NaN presence)
+[✅ PASS] Edge Case: Malformed Datatype Injection
+
+==================================================
+  AI AGENT TESTING DOMAIN VALIDATION REPORT
+==================================================
+Total Test Cases Executed : 8
+Passed Correctly          : 8
+Execution Failures        : 0
+System Accuracy           : 100.00%
+
+✅ SYSTEM IS FULLY COMPLIANT AND PRODUCTION-READY.
+==================================================
+
+[✓] Phase 4/4: Validating Audit Log Telemetry Generation...
+[AuditLogger] Telemetry exported successfully -> C:\Users\Abishek14\WebstormProjects\ET-GENAI-ROUND2-PROJECT\finance_agent\backend\cc_pipeline\..\exports\audit_logs.json
+[AuditLogger] Telemetry exported successfully -> C:\Users\Abishek14\WebstormProjects\ET-GENAI-ROUND2-PROJECT\finance_agent\backend\cc_pipeline\..\exports\audit_logs.csv
+✅ Audit Exporters passing checksums: 
+ - C:\Users\Abishek14\WebstormProjects\ET-GENAI-ROUND2-PROJECT\finance_agent\backend\cc_pipeline\..\exports\audit_logs.json 
+ - C:\Users\Abishek14\WebstormProjects\ET-GENAI-ROUND2-PROJECT\finance_agent\backend\cc_pipeline\..\exports\audit_logs.csv
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--- LIVE DETONATION DEMONSTRATION ---
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[NORMAL] DECISION: APPROVE
+   ↳ Probabilistic MSE   : 0.17694
+   ↳ Deterministic Rules : []
+   ↳ Audit Token ID      : CC-41D2E706
+
+[ANOMALY] DECISION: FLAG
+   ↳ Probabilistic MSE   : 1187.93579
+   ↳ Deterministic Rules : []
+   ↳ Audit Token ID      : CC-2E3C3A0C
+
+[RULE VIOLATION] DECISION: REJECT
+   ↳ Probabilistic MSE   : 4121.45312
+   ↳ Deterministic Rules : ['R002']
+   ↳ Audit Token ID      : CC-E1CE2C6F
+
+Execution Time: 3.88 seconds.

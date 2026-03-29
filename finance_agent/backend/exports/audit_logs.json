@@ -1,0 +1,97 @@
+[
+    {
+        "transaction_id": "CC-41D2E706",
+        "system_timestamp": "2026-03-29T09:16:42.737887Z",
+        "dataset_time_sec": 3600,
+        "amount": 150.0,
+        "input_v_sum": 1.4000000000000001,
+        "anomaly_score_mse": 0.176942,
+        "threshold": 9.913725,
+        "rules_triggered": [],
+        "final_decision": "APPROVE",
+        "reasoning": "Transaction strictly cleared all rules and AI anomaly thresholds."
+    },
+    {
+        "transaction_id": "CC-2E3C3A0C",
+        "system_timestamp": "2026-03-29T09:16:42.742601Z",
+        "dataset_time_sec": 5000,
+        "amount": 850.0,
+        "input_v_sum": 91.0,
+        "anomaly_score_mse": 1187.935791,
+        "threshold": 9.913725,
+        "rules_triggered": [],
+        "final_decision": "FLAG",
+        "reasoning": "AI detected unusual latent patterns (High MSE score). Flagging for human review."
+    },
+    {
+        "transaction_id": "CC-E1CE2C6F",
+        "system_timestamp": "2026-03-29T09:16:42.746474Z",
+        "dataset_time_sec": 4000,
+        "amount": 75000.0,
+        "input_v_sum": 1.4000000000000001,
+        "anomaly_score_mse": 4121.453125,
+        "threshold": 9.913725,
+        "rules_triggered": [
+            "R002"
+        ],
+        "final_decision": "REJECT",
+        "reasoning": "Transaction violates deterministic compliance guardrails (Hard Rule Failure)."
+    },
+    {
+        "transaction_id": "CC-CE0D223D",
+        "system_timestamp": "2026-03-29T09:16:42.750034Z",
+        "dataset_time_sec": 4200,
+        "amount": -50.0,
+        "input_v_sum": 1.4000000000000001,
+        "anomaly_score_mse": 0.270332,
+        "threshold": 9.913725,
+        "rules_triggered": [
+            "R001"
+        ],
+        "final_decision": "REJECT",
+        "reasoning": "Transaction violates deterministic compliance guardrails (Hard Rule Failure)."
+    },
+    {
+        "transaction_id": "CC-828DD4F2",
+        "system_timestamp": "2026-03-29T09:16:42.752775Z",
+        "dataset_time_sec": 8000,
+        "amount": 200.0,
+        "input_v_sum": 1.4000000000000001,
+        "anomaly_score_mse": 1.352399,
+        "threshold": 9.913725,
+        "rules_triggered": [
+            "R003"
+        ],
+        "final_decision": "REJECT",
+        "reasoning": "Transaction violates deterministic compliance guardrails (Hard Rule Failure)."
+    },
+    {
+        "transaction_id": "CC-C919DBA3",
+        "system_timestamp": "2026-03-29T09:16:42.756624Z",
+        "dataset_time_sec": 9000,
+        "amount": 150000.0,
+        "input_v_sum": 91.0,
+        "anomaly_score_mse": 17689.595703,
+        "threshold": 9.913725,
+        "rules_triggered": [
+            "R002",
+            "R003"
+        ],
+        "final_decision": "REJECT",
+        "reasoning": "Transaction violates deterministic compliance guardrails (Hard Rule Failure)."
+    },
+    {
+        "transaction_id": "CC-2D27A1A9",
+        "system_timestamp": "2026-03-29T09:16:42.760644Z",
+        "dataset_time_sec": 3600,
+        "amount": 500.0,
+        "input_v_sum": NaN,
+        "anomaly_score_mse": NaN,
+        "threshold": 9.913725,
+        "rules_triggered": [
+            "R004"
+        ],
+        "final_decision": "REJECT",
+        "reasoning": "Transaction violates deterministic compliance guardrails (Hard Rule Failure)."
+    }
+]
