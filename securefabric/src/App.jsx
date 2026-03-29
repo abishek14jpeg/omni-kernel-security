@@ -12,6 +12,7 @@ import ComparisonPage from './pages/ComparisonPage';
 import SixGPage from './pages/SixGPage';
 import HoneypotPage from './pages/HoneypotPage';
 import AIPage from './pages/AIPage';
+import FinancePage from './pages/FinancePage';
 import { useRealtime } from './hooks/useRealtime';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         {currentPage === 'sixg' && <SixGPage onNavigate={setCurrentPage} />}
         {currentPage === 'honeypot' && <HoneypotPage onNavigate={setCurrentPage} />}
         {currentPage === 'ai' && <AIPage onNavigate={setCurrentPage} />}
+        {currentPage === 'finance' && <FinancePage onNavigate={setCurrentPage} />}
       </div>
     </div>
   );

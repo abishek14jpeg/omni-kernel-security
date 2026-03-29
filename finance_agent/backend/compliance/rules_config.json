@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-03-29T06:09:53.663598Z",
+  "rules": [
+    {
+      "id": "R001",
+      "name": "Double-Entry Balance",
+      "description": "Total debits must equal total credits for each transaction (double-entry bookkeeping)",
+      "enabled": true,
+      "severity": "critical",
+      "category": "accounting",
+      "params": {
+        "tolerance": 0.01
+      }
+    },
+    {
+      "id": "R002",
+      "name": "Transaction Amount Limit",
+      "description": "Transaction amount must not exceed the configured maximum threshold",
+      "enabled": true,
+      "severity": "critical",
+      "category": "policy",
+      "params": {
+        "max_amount": 1000000
+      }
+    },
+    {
+      "id": "R003",
+      "name": "Approval Threshold",
+      "description": "Transactions exceeding the threshold require manager approval",
+      "enabled": true,
+      "severity": "high",
+      "category": "policy",
+      "params": {
+        "approval_threshold": 50000
+      }
+    },
+    {
+      "id": "R004",
+      "name": "Segregation of Duties",
+      "description": "Transaction initiator and approver must be different individuals",
+      "enabled": false,
+      "severity": "critical",
+      "category": "compliance",
+      "params": {}
+    },
+    {
+      "id": "R005",
+      "name": "Duplicate Detection",
+      "description": "No duplicate transactions with same amount, account, and timestamp within the time window",
+      "enabled": true,
+      "severity": "high",
+      "category": "fraud",
+      "params": {
+        "time_window_minutes": 5
+      }
+    },
+    {
+      "id": "R006",
+      "name": "Unauthorized Account",
+      "description": "All accounts must be in the approved chart of accounts",
+      "enabled": true,
+      "severity": "critical",
+      "category": "compliance",
+      "params": {
+        "approved_accounts": [
+          "1000",
+          "1100",
+          "1200",
+          "2000",
+          "2100",
+          "3000",
+          "3100",
+          "4000",
+          "5000",
+          "5100",
+          "5200"
+        ]
+      }
+    },
+    {
+      "id": "R007",
+      "name": "Timing Anomaly",
+      "description": "Transactions outside business hours require override flag",
+      "enabled": true,
+      "severity": "medium",
+      "category": "policy",
+      "params": {
+        "business_hours_start": 7,
+        "business_hours_end": 19
+      }
+    },
+    {
+      "id": "R008",
+      "name": "Missing Required Fields",
+      "description": "All mandatory transaction fields must be present and non-empty",
+      "enabled": true,
+      "severity": "critical",
+      "category": "data_quality",
+      "params": {
+        "required_fields": [
+          "transaction_id",
+          "timestamp",
+          "amount",
+          "debit_account",
+          "credit_account",
+          "type",
+          "initiated_by"
+        ]
+      }
+    },
+    {
+      "id": "R009",
+      "name": "Ledger Consistency",
+      "description": "Debit and credit amounts must be positive and internally consistent",
+      "enabled": true,
+      "severity": "high",
+      "category": "accounting",
+      "params": {}
+    },
+    {
+      "id": "R010",
+      "name": "Policy Violation Pattern",
+      "description": "Transaction descriptions must not match known policy violation patterns",
+      "enabled": true,
+      "severity": "medium",
+      "category": "compliance",
+      "params": {
+        "violation_patterns": [
+          "(?i)cash.*advance.*personal",
+          "(?i)unauthorized",
+          "(?i)bypass.*approval",
+          "(?i)split.*transaction"
+        ]
+      }
+    }
+  ]
+}

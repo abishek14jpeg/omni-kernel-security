@@ -33,6 +33,8 @@ export default function TopNavigation({ onNavigate, currentPage }) {
               <a onClick={() => onNavigate('ai')} className="cursor-pointer text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-slate-800 rounded-lg px-3 py-2.5 transition-colors">AI Models</a>
               <a onClick={() => onNavigate('reports')} className="cursor-pointer text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-slate-800 rounded-lg px-3 py-2.5 transition-colors">Neural Reports</a>
               <a onClick={() => onNavigate('assets')} className="cursor-pointer text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-slate-800 rounded-lg px-3 py-2.5 transition-colors">Assets</a>
+              <div className="border-t border-slate-200 dark:border-slate-700 my-1"></div>
+              <a onClick={() => onNavigate('finance')} className="cursor-pointer text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-slate-800 rounded-lg px-3 py-2.5 transition-colors flex items-center gap-2">Finance AI Agent <span className="text-[9px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded">NEW</span></a>
             </div>
           </div>
         </div>
